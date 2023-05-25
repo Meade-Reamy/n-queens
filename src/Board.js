@@ -148,6 +148,9 @@
       //let currentColumn = majorDiagonalColumnIndexAtFirstRow;
       //let currentRow = 0;
       //console.log(majorDiagonalColumnIndexAtFirstRow);
+
+
+
       let currentColumn = majorDiagonalColumnIndexAtFirstRow;
       let pieceFound = false;
       for ( let currentRow = 0; currentRow < this.get('n'); currentRow++ ) {
@@ -160,7 +163,6 @@
         }
         currentColumn++;
       }
-
 
       return false; // fixme
     },
@@ -219,11 +221,22 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
+
+    /*
+      var matrix = [
+        [0, 0, 0, 0]0,0,
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ];
+     */
+
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       let currentColumn = minorDiagonalColumnIndexAtFirstRow;
       let pieceFound = false;
       for ( let currentRow = 0; currentRow < this.get('n'); currentRow++ ) {
         if (this.get(currentRow)[currentColumn]) {
+        // console.log([currentRow, currentColumn])
           if (pieceFound) {
             return true;
           } else {
@@ -240,9 +253,9 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
 
-      for (var idx = 0; idx < this.get('n') * 2; idx++) {
+      for (var idx = 0; idx < (this.get('n') * 2) - 1; idx++) {
 
-        if (this.hasMajorDiagonalConflictAt(idx)) {
+        if (this.hasMinorDiagonalConflictAt(idx)) {
           return true;
         }
       }
